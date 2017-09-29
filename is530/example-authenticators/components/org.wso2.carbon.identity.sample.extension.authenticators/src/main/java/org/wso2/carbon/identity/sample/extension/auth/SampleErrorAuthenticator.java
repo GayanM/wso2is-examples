@@ -32,14 +32,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Hwk.
+ * Error.
  */
-public class SampleHardwareKeyAuthenticator extends AbstractSampleAuthenticator {
+public class SampleErrorAuthenticator extends AbstractSampleAuthenticator {
 
     private static final long serialVersionUID = 6439291340285653402L;
-    private static final String HWK_APP_URL = "HwkAppUrl";
+    private static final String ERROR_URL = "ErrorUrl";
 
-    private static final Log log = LogFactory.getLog(SampleHardwareKeyAuthenticator.class);
+    private static final Log log = LogFactory.getLog(SampleErrorAuthenticator.class);
 
     @Override
     public boolean canHandle(HttpServletRequest request) {
@@ -55,7 +55,7 @@ public class SampleHardwareKeyAuthenticator extends AbstractSampleAuthenticator 
 
     @Override
     protected String getPageUrlProperty() {
-        return HWK_APP_URL;
+        return ERROR_URL;
     }
 
     @Override
@@ -66,12 +66,12 @@ public class SampleHardwareKeyAuthenticator extends AbstractSampleAuthenticator 
 
     @Override
     public String getName() {
-        return "SampleHardwareKeyAuthenticator";
+        return "SampleErrorAuthenticator";
     }
 
     @Override
     public String getFriendlyName() {
-        return "Sample HardwareKey Authenticator";
+        return "Sample Error Authenticator";
     }
 
     @Override
@@ -84,10 +84,10 @@ public class SampleHardwareKeyAuthenticator extends AbstractSampleAuthenticator 
         List<Property> configProperties = new ArrayList<>();
 
         Property appUrl = new Property();
-        appUrl.setName(HWK_APP_URL);
-        appUrl.setDisplayName("Hardware Key Sample URL");
+        appUrl.setName(ERROR_URL);
+        appUrl.setDisplayName("Error URL");
         appUrl.setRequired(true);
-        appUrl.setDescription("Enter sample HWK url value.");
+        appUrl.setDescription("Enter error url value.");
         appUrl.setDisplayOrder(0);
         configProperties.add(appUrl);
         return configProperties;

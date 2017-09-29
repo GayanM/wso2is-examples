@@ -53,6 +53,7 @@ public abstract class AbstractSampleAuthenticator implements FederatedApplicatio
     @Override
     public AuthenticatorFlowStatus process(HttpServletRequest request, HttpServletResponse response,
             AuthenticationContext context) throws AuthenticationFailedException, LogoutFailedException {
+
         log.info("Sample Authenticator: \"" + getFriendlyName() + "\" called");
         String authenticatorName = request.getParameter("authenticatorName");
         if (context.isLogoutRequest()) {

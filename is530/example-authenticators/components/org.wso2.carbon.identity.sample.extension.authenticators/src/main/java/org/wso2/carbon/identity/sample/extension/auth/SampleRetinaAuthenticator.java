@@ -20,11 +20,16 @@ package org.wso2.carbon.identity.sample.extension.auth;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.identity.application.authentication.framework.AuthenticatorFlowStatus;
+import org.wso2.carbon.identity.application.authentication.framework.context.AuthenticationContext;
+import org.wso2.carbon.identity.application.authentication.framework.exception.AuthenticationFailedException;
+import org.wso2.carbon.identity.application.authentication.framework.exception.LogoutFailedException;
 import org.wso2.carbon.identity.application.common.model.Property;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Retina.
@@ -39,6 +44,21 @@ public class SampleRetinaAuthenticator extends AbstractSampleAuthenticator {
     @Override
     public boolean canHandle(HttpServletRequest request) {
         return true;
+    }
+
+    @Override
+    public AuthenticatorFlowStatus process(HttpServletRequest request, HttpServletResponse response,
+                                           AuthenticationContext context) throws AuthenticationFailedException,
+            LogoutFailedException {
+        String status = request.getParameter("status");
+
+        if ("fail".equals(status)) {
+            return AuthenticatorFlowStatus.FAIL_COMPLETED;
+        }
+        if ("fallback".equals(status)) {
+            return AuthenticatorFlowStatus.FALLBACK;
+        }
+        return super.process(request, response, context);
     }
 
     @Override

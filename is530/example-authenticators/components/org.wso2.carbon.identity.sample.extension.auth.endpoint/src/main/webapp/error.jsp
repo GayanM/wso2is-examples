@@ -24,13 +24,6 @@
 
     String f = request.getParameter("f");
     String callbackUrl = request.getParameter("callbackUrl");
-    String state = request.getParameter("state");
-
-    if (callbackUrl != null && state != null) {
-        String cbURl = URLDecoder.decode(callbackUrl, StandardCharsets.UTF_8.name());
-        cbURl = cbURl+"&status="+state; //This is just a sample. No security enforced.
-        response.sendRedirect(cbURl);
-    }
 
     if(f != null) {
         if(callbackUrl != null) {
@@ -70,7 +63,7 @@
             <!-- content -->
             <div class="container col-xs-10 col-sm-6 col-md-6 col-lg-3 col-centered wr-content wr-login col-centered">
                 <div>
-                    <h2 class="wr-title blue-bg padding-double white boarder-bottom-blue margin-none">Retina Scanner </h2>
+                    <h2 class="wr-title blue-bg padding-double white boarder-bottom-blue margin-none">Error in Authentication</h2>
                 </div>
                 <div class="boarder-all ">
                     <div class="clearfix"></div>
@@ -78,12 +71,17 @@
 
                         <form action="" method="post" id="loginForm">
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <img id="retinaImage" src="images/retina.gif" class="img-responsive">
+                                <img id="fptImage" src="images/fail.jpg" class="img-responsive">
+                            </div>
+                            <div id="scanner_container" class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <canvas id="scanner" class="img-responsive"></canvas>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-                                <input id="callbackUrl" name="callbackUrl" hidden="hidden" value="<%=callbackUrl%>" />
                                 <input id="fingerprint" name="f" type="text" value="f"  tabindex="0"
                                        placeholder="Please type f for fingerprint" hidden="hidden">
+                                <input id="callbackUrl" name="callbackUrl" hidden="hidden" value="<%=callbackUrl%>" />
+                                <input id="authenticator" name="authenticator" hidden="hidden"
+                                       value="SampleFingerprintAuthenticator">
                             </div>
 
                             <br>
@@ -91,7 +89,7 @@
                             <div class="form-actions">
                                 <button
                                         class="wr-btn grey-bg col-xs-12 col-md-12 col-lg-12 uppercase font-extra-large"
-                                        type="submit">Scan
+                                        type="submit">Error
                                 </button>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
@@ -102,36 +100,7 @@
 
                             <div class="clearfix"></div>
                         </form>
-                        <form action="">
 
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-                                <input id="callbackUrl1" name="callbackUrl" hidden="hidden" value="<%=callbackUrl%>" />
-                                <input id="fingerprint1" name="state" type="text" value="fail"  tabindex="0"
-                                       placeholder="Please type f for fingerprint" hidden="hidden">
-                            </div>
-
-                            <div class="form-actions">
-                                <button
-                                        class="wr-btn grey-bg col-xs-12 col-md-12 col-lg-12 uppercase font-extra-large"
-                                        type="submit">Fail
-                                </button>
-                            </div>
-                        </form>
-                        <form action="">
-
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
-                                <input id="callbackUrl2" name="callbackUrl" hidden="hidden" value="<%=callbackUrl%>" />
-                                <input id="fingerprint2" name="state" type="text" value="fallback"  tabindex="0"
-                                       placeholder="Please type f for fingerprint" hidden="hidden">
-                            </div>
-
-                            <div class="form-actions">
-                                <button
-                                        class="wr-btn grey-bg col-xs-12 col-md-12 col-lg-12 uppercase font-extra-large"
-                                        type="submit">Fallback
-                                </button>
-                            </div>
-                        </form>
                         <div class="clearfix"></div>
                     </div>
                 </div>

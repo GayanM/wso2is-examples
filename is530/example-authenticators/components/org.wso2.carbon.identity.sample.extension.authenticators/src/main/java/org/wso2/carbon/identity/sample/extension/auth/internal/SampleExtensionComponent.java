@@ -22,6 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.service.component.ComponentContext;
 import org.wso2.carbon.identity.application.authentication.framework.ApplicationAuthenticator;
+import org.wso2.carbon.identity.sample.extension.auth.SampleErrorAuthenticator;
 import org.wso2.carbon.identity.sample.extension.auth.SampleFingerprintAuthenticator;
 import org.wso2.carbon.identity.sample.extension.auth.SampleHardwareKeyAuthenticator;
 import org.wso2.carbon.identity.sample.extension.auth.SampleRetinaAuthenticator;
@@ -43,12 +44,15 @@ public class SampleExtensionComponent {
         SampleHardwareKeyAuthenticator sampleHardwareKeyAuthenticator = new SampleHardwareKeyAuthenticator();
         SampleFingerprintAuthenticator sampleFingerprintAuthenticator = new SampleFingerprintAuthenticator();
         SampleRetinaAuthenticator retinaAuthenticator = new SampleRetinaAuthenticator();
+        SampleErrorAuthenticator sampleErrorAuthenticator = new SampleErrorAuthenticator();
         ctxt.getBundleContext()
                 .registerService(ApplicationAuthenticator.class.getName(), sampleHardwareKeyAuthenticator, null);
         ctxt.getBundleContext()
                 .registerService(ApplicationAuthenticator.class.getName(), sampleFingerprintAuthenticator, null);
         ctxt.getBundleContext()
                 .registerService(ApplicationAuthenticator.class.getName(), retinaAuthenticator, null);
+        ctxt.getBundleContext().registerService(ApplicationAuthenticator.class.getName(), sampleErrorAuthenticator,
+                null);
     }
 
     /**
